@@ -137,7 +137,8 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
-   object-position: 50% 35%;   /* 50% horizontal, 20% from the top */
+   object-position: 70% 40%;   /* 50% horizontal, 20% from the top */
+   /* transform: scale(1.5); increase this number to zoom in more */
 }
 
 .card-front .overlay {
