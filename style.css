@@ -1,0 +1,181 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Playfair Display', serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  background: #fdf4ec;
+}
+
+.ps-message {
+  font-size: 10px;
+  color: #5c3d25;
+  line-height: 1.8;
+  max-width: 400px;
+  text-align: center;
+}
+
+.scene {
+  perspective: 1600px;
+  width: 720px;
+  height: 500px;
+  position: relative;
+}
+
+.card-body {
+  width: 720px;
+  height: 500px;
+  position: relative;
+}
+
+/* Inside panel — always full width, sits behind the cover */
+.inside-panel {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+}
+
+/* Left side: two cute graphics */
+.inside-left {
+  background: #1e4f63;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  overflow: hidden;
+  padding: 12px 8px;
+}
+
+.inside-left .graphic {
+  width: 85%;
+  height: auto;
+  max-height: 47%;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* Flip the duck so it faces right toward the message */
+.inside-left .graphic.flip {
+  transform: scaleX(-1);
+}
+
+/* Right side: message */
+.inside-right {
+  background: #fffbf7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
+  text-align: center;
+  gap: 1rem;
+}
+
+.inside-right .greeting {
+  font-size: 11px;
+  color: #c4895a;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.inside-right .divider {
+  width: 40px;
+  height: 1px;
+  background: #e8c9a8;
+}
+
+.inside-right .message {
+  font-size: 13.5px;
+  color: #5c3d25;
+  line-height: 1.8;
+}
+
+.inside-right .signature {
+  font-size: 15px;
+  font-style: italic;
+  color: #b87040;
+}
+
+/* 
+  Card front: starts full 720px wide, covering everything.
+  Flips open from the left edge like a real card cover.
+*/
+.card-front {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 720px;
+  height: 500px;
+  border-radius: 18px;
+  overflow: hidden;
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  transition: transform 0.9s cubic-bezier(0.4, 0.0, 0.2, 1);
+  cursor: pointer;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.18);
+  z-index: 2;
+  backface-visibility: hidden;
+ 
+}
+
+/* When opened, rotate -178deg around left edge — flips it behind left half */
+.card-body.opened .card-front {
+  transform: rotateY(-178deg);
+}
+
+.card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+   object-position: 50% 35%;   /* 50% horizontal, 20% from the top */
+}
+
+.card-front .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.48) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 2.5rem 2rem;
+  
+}
+
+.front-title {
+  color: #fff;
+  font-size: 46px;
+  font-weight: 700;
+  line-height: 1.1;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+
+.front-sub {
+  color: rgba(255,255,255,0.80);
+  font-size: 14px;
+  font-style: italic;
+  margin-top: 6px;
+}
+
+.hint {
+  font-size: 14px;
+  color: #b09070;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You Card</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="scene">
+    <div class="card-body" id="card">
+
+      <!-- Inside of card (behind the front cover) -->
+      <div class="inside-panel">
+        <div class="inside-left">
+          <img class="graphic" src="thankyougraphic1.png" alt="Graduation cat holding a thank you sign">
+          <img class="graphic" src="thankyougraphic2.png" alt="Graduation duck holding flowers">
+        </div>
+        <div class="inside-right">
+          <p class="greeting">A little note</p>
+          <div class="divider"></div>
+          <p class="message">I really appreciate you taking time out of your day to celebrate my accomplisments from 
+            my undergraduate to graduate degrees. Thank you for the monetary gifts, the kind words, and the support.         
+            
+             </p>
+          <div class="divider"></div>
+          <p class="signature">With gratitude, <br>Briana<br>♡</p>
+
+          <p class="ps-message">P.S. The cover page is one of my research professor and my dad. My Master’s Thesis is "A Large-Scale Empirical Study on Security Vulnerabilities in Open-Source Scientific Python Code."</p>
+        </div>
+      </div>
+
+      <!-- Front cover — replace image.png with your cover image file -->
+      <div class="card-front" id="front">
+        <img src="image.png" alt="Card cover image">
+        <div class="overlay">
+          <div class="front-title">Thank You</div>
+          <div class="front-sub">from the bottom of my heart</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <p class="hint" id="hint">Click the card to open</p>
+
+  <script src="script.js"></script>
+</body>
+</html>
