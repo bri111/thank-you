@@ -1,16 +1,20 @@
 const card = document.getElementById('card');
-    const hint = document.getElementById('hint');
-    let open = false;
+const hint = document.getElementById('hint');
+let open = false;
 
-    card.addEventListener('click', () => {
-      open = !open;
-      card.classList.toggle('opened', open);
-      hint.textContent = open ? 'Click again to close' : 'Click the card to open';
-    });
+// Click the front cover to open
+document.getElementById('front').addEventListener('click', () => {
+  open = true;
+  card.classList.add('opened');
+  hint.textContent = 'Click here to close ↑';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        card.click();
-      }
-    });
+// Click the hint to close
+hint.addEventListener('click', () => {
+  if (open) {
+    open = false;
+    card.classList.remove('opened');
+    hint.textContent = 'Click the card to open';
+  }
+});

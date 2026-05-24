@@ -7,75 +7,70 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
+  padding: 2rem 1rem;
+  gap: 1rem;
   background: #fdf4ec;
 }
 
-.ps-message {
-  font-size: 10px;
-  color: #5c3d25;
-  line-height: 1.8;
-  max-width: 400px;
-  text-align: center;
-}
-
 .scene {
-  perspective: 1600px;
-  width: 720px;
-  height: 500px;
-  position: relative;
+  width: 100%;
+  max-width: 380px;
 }
 
 .card-body {
-  width: 720px;
-  height: 500px;
-  position: relative;
-}
-
-/* Inside panel — always full width, sits behind the cover */
-.inside-panel {
-  position: absolute;
-  inset: 0;
-  border-radius: 18px;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
-}
-
-/* Left side: two cute graphics */
-.inside-left {
-  background: #1e4f63;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
+  gap: 0;
+}
+
+/* ── Inside panel: hidden until opened ── */
+.inside-panel {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 18px;
   overflow: hidden;
-  padding: 12px 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  margin-bottom: 1rem;
+}
+
+.card-body.opened .inside-panel {
+  display: flex;
+}
+
+/* Front cover hidden after open */
+.card-body.opened .card-front {
+  display: none;
+}
+
+/* Graphics side by side */
+.inside-left {
+  width: 100%;
+  height: 205px;
+  display: flex;
+  flex-direction: row;
+  background: #1a4a60;
+  overflow: hidden;
 }
 
 .inside-left .graphic {
-  width: 85%;
-  height: auto;
-  max-height: 47%;
-  object-fit: contain;
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
   display: block;
-  flex-shrink: 0;
 }
 
-/* Flip the duck so it faces right toward the message */
-.inside-left .graphic.flip {
-  transform: scaleX(-1);
-}
-
-/* Right side: message */
+/* Message panel */
 .inside-right {
+  width: 100%;
   background: #fffbf7;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1.25rem;
+  padding: 2rem 1.75rem;
   text-align: center;
   gap: 1rem;
 }
@@ -83,7 +78,7 @@ body {
 .inside-right .greeting {
   font-size: 11px;
   color: #c4895a;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
@@ -94,89 +89,88 @@ body {
 }
 
 .inside-right .message {
-  font-size: 13.5px;
+  font-size: 14px;
   color: #5c3d25;
-  line-height: 1.8;
+  line-height: 1.85;
 }
 
 .inside-right .signature {
-  font-size: 15px;
+  font-size: 16px;
   font-style: italic;
   color: #b87040;
+  line-height: 1.6;
 }
 
-/* 
-  Card front: starts full 720px wide, covering everything.
-  Flips open from the left edge like a real card cover.
-*/
+.inside-right .ps-message {
+  font-size: 11.5px;
+  color: #9a7050;
+  line-height: 1.7;
+  font-style: italic;
+}
+
+/* ── Front cover ── */
 .card-front {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 720px;
-  height: 500px;
+  width: 100%;
+  height: 520px;
   border-radius: 18px;
   overflow: hidden;
-  transform-origin: left center;
-  transform-style: preserve-3d;
-  transition: transform 0.9s cubic-bezier(0.4, 0.0, 0.2, 1);
   cursor: pointer;
-  box-shadow: 0 16px 48px rgba(0,0,0,0.18);
-  z-index: 2;
-  backface-visibility: hidden;
- 
-}
-
-/* When opened, rotate -178deg around left edge — flips it behind left half */
-.card-body.opened .card-front {
-  transform: rotateY(-178deg);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.20);
+  position: relative;
 }
 
 .card-front img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 50% 50%;
   display: block;
-   object-position: 70% 40%;   /* 50% horizontal, 20% from the top */
-   /* transform: scale(1.5); increase this number to zoom in more */
 }
 
 .card-front .overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.48) 100%);
+  background: linear-gradient(180deg, rgba(0,0,0,0.04) 0%, rgba(0,0,0,0.52) 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
   padding: 2.5rem 2rem;
-  
 }
 
 .front-title {
   color: #fff;
-  font-size: 46px;
+  font-size: clamp(34px, 9vw, 48px);
   font-weight: 700;
   line-height: 1.1;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  text-shadow: 0 2px 12px rgba(0,0,0,0.35);
 }
 
 .front-sub {
-  color: rgba(255,255,255,0.80);
-  font-size: 14px;
+  color: rgba(255,255,255,0.82);
+  font-size: clamp(12px, 3vw, 15px);
   font-style: italic;
   margin-top: 6px;
 }
 
+/* ── Hint ── */
 .hint {
   font-size: 14px;
   color: #b09070;
-  font-family: 'Playfair Display', serif;
   font-style: italic;
+  text-align: center;
+  cursor: pointer;
   animation: pulse 2s ease-in-out infinite;
 }
 
 @keyframes pulse {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.45; }
+  50% { opacity: 0.4; }
+}
+
+@media (max-width: 380px) {
+  body { padding: 1rem 0.75rem; }
+  .inside-right { padding: 1.75rem 1.25rem; }
+  .card-front { height: 440px; }
+  .inside-left { height: 260px; }
 }
